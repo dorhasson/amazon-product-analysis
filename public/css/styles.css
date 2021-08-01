@@ -1,0 +1,35 @@
+.main-table{
+  width:80%;
+  border: solid;
+  border-width: 1px;
+  border-radius: 15px;
+  margin-left: 20%;
+  position: relative;
+  top:-60em;
+  right:1em;
+}
+
+tbody.body-parameters{
+line-height:5;
+}
+
+.btn{
+position: relative;
+line-height: 1;
+top:-0.1em;
+background-color: #0d8efd !important
+}
+.btn:hover{
+ background-color:#1271c3 !important;
+}
+
+section.left-side-bar{
+  width:14.5%;
+}
+.navbar{
+  height: 10vh;
+}
+
+.bg-primary{
+  background-color: #0d8efd !important;
+}
