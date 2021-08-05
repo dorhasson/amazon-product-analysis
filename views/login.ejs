@@ -1,0 +1,55 @@
+
+<%- include('partials/header') %>
+
+  <body class="text-center">
+
+<main class="form-signin">
+  <form action="/login" method="POST">
+    <img class="mb-4" src="images/logoBlack.png" alt="" width="" height="">
+    <h1 class="h3 mb-3 fw-normal">Login to your account</h1>
+
+    <div class="form-floating">
+      <input type="email" class="form-control" id="floatingInput" name="username" placeholder="name@example.com">
+      <label for="floatingInput">Email address</label>
+    </div>
+    <div class="form-floating">
+      <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password">
+      <label for="floatingPassword">Password</label>
+    </div>
+
+    <div class="checkbox mb-3">
+      <label>
+        <input type="checkbox" value="remember-me"> Remember me
+      </label>
+    </div>
+    <button class="w-100 btn btn-lg btn-primary form-btn" type="submit">Login</button>
+    <p>Not registered yet? <a href="/register">Register Now</a></p>
+    <p class="mt-5 mb-3 text-muted">&copy; 2021–2022</p>
+  </form>
+</main>
+
+<style media="screen">
+  nav.navbar.navbar-expand-lg.navbar-light.navbar-dark.bg-primary{
+    display:none;
+  }
+.form-signin{
+  width:20%;
+  margin-left:40%;
+  margin-top:15%;
+  border-radius:20px;
+  box-shadow:  0 0 10px #95979e;
+}
+.form-floating{
+  width:80%;
+  margin-left:10%;
+}
+.form-btn{
+width:80% !important;
+}
+html{
+  overflow-y:hidden;
+}
+</style>
+
+  </body>
+</html>

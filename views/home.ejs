@@ -1,11 +1,14 @@
 <%- include('partials/header') %>
 
+<div class="div-lottiefiles">
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+  <lottie-player class="lottiefiles" src="https://assets7.lottiefiles.com/packages/lf20_yrgkfams.json"  background="transparent"  speed="2"  style="width: 50px; height: 50px; position:absolute; left:11em; top:6.5em;"  loop autoplay></lottie-player>
+</div>
+
+
 <section class="left-side-bar">
-
-  <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px; height:100vh;">
-      <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+  <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px; height:100vh; top:-4em;">
       <span class="fs-4">Asin Analysis</span>
-
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item">
@@ -13,34 +16,39 @@
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"/></svg>
           <div class="input-group">
           <form action="/" method="post">
-            <input id="asinInput" type="text" name="asinIdInput" value="" placeholder="Type Asin">
+            <input id="asinInput" type="text" name="asinIdInput" value="" placeholder="Type Asin" required>
+            <input id="costId" type="text" name="costIdInput" value="" placeholder="Cost of Goods" required>
             <button class="btn btn-primary" type="submit">Go</button>
           </form>
           </div>
         <!-- </a> -->
       </li>
-      <li>
+      <hr>
+      <li class="dashboard">
         <a href="#" class="nav-link text-white">
-          <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
+          <i class="fas fa-tachometer-alt"></i>
           Dashboard
         </a>
       </li>
+      <hr>
       <li>
         <a href="#" class="nav-link text-white">
-          <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"/></svg>
+          <i class="fas fa-thumbs-up"></i>
+          Take Products
+        </a>
+      </li>
+      <hr>
+      <li>
+        <a href="#" class="nav-link text-white">
+          <i class="fab fa-first-order"></i>
           Orders
         </a>
       </li>
+      <hr>
       <li>
         <a href="#" class="nav-link text-white">
-          <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
-          Products
-        </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link text-white">
-          <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
-          Customers
+          <i class="fas fa-upload"></i>
+          Upload CSV
         </a>
       </li>
     </ul>
@@ -50,31 +58,79 @@
 </section>
 
 <section class="main-table">
-<table class="table table-hover">
-<thead>
-<tr>
-  <th scope="col">#</th>
-  <th scope="col">Date</th>
-  <th scope="col">ASIN</th>
-  <th scope="col">Price</th>
-  <th scope="col">Category</th>
-  <th scope="col">SubCategory</th>
-  <th scope="col">Fees</th>
-</thead>
-<tbody class="body-parameters">
-<tr>
-  <th scope="row">1</th>
-  <td><%=date%></td>
-  <td><%=asinNumber%></td>
-  <td><%=priceNumber%></td>
-  <td><%=categoryNumber%></td>
-  <td><%=subCategoryNumber%></td>
-  <td><%=fbaFeeNumber%></td>
-</tr>
-</tbody>
-</table>
+
+<div class="limiter">
+  <div class="container-table100">
+    <div class="wrap-table100">
+      <div class="table100 ver1">
+        <div class="table100-firstcol">
+          <table class="firs-table">
+            <thead>
+              <tr class="row100 head asin-row">
+                <th class="cell100 column1">Asin</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="row100 body asin-data-row">
+                <td class="cell100 column1.1"><%=asinNumber%></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="div-product-image">
+          <a href="<%=productUrl%>" target="_blank"><img class="product-image" src="<%=imageUrl%>" alt=""></a>
+          </div>
+        </div>
+
+        <div class="wrap-table100-nextcols js-pscroll">
+          <div class="table100-nextcols">
+            <table class ="table-main-width">
+              <thead>
+                <tr class="row100 head">
+                  <th class="cell100 column2">Date</th>
+                  <th class="cell100 column3">COGS</th>
+                  <th class="cell100 column4">Price</th>
+                  <th class="cell100 column5">Root Category</th>
+                  <th class="cell100 column6">FBA Fees</th>
+                  <th class="cell100 column7">Fees</th>
+                  <th class="cell100 column8">Landed Cost</th>
+                  <th class="cell100 column9">Profit</th>
+                  <th class="cell100 column10">Roi</th>
+                  <th class="cell100 column11">AVG PRICE LAST 30D</th>
+                </tr>
+              </thead>
+              <tbody class="product-data-row">
+                <tr class="row100 body">
+                  <td class="cell100 column2"><%=date%></td>
+                  <td class="cell100 column3"><%=cost%></td>
+                  <td class="cell100 column4"><%=priceNumber%></td>
+                  <td class="cell100 column5"><%=categoryNumber%></td>
+                  <td class="cell100 column6"><%=fbaFeeNumber%></td>
+                  <td class="cell100 column7"><%=referal%></td>
+                  <td class="cell100 column8"><%=landed%></td>
+                  <td class="cell100 column9"><%=profit%></td>
+                  <td class="cell100 column10 roi"><%=roi%></td>
+                  <td class="cell100 column11"><span class="green-per">%</span><span class="green-per-i"><i class="fas fa-arrow-up"></i></span><span class="red-per">%</span><span class="red-per-i" ><i class="fas fa-arrow-down"></i></span></td>
+                  <td class="cell100 column11"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 </section>
-<!-- JavaScript Bundle with Popper -->
+
+
+<script src="vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+<script src="vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+
+<script src="https://kit.fontawesome.com/113f08f027.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script type="text/javascript" src="jquery/jquery.js"></script>
+
 
 <%- include('partials/footer') %>

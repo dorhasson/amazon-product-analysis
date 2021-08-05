@@ -14,8 +14,8 @@ app.set('view engine', 'ejs');
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
 
-mongoose.connect("mongodb://localhost:27017/asinDB", {useNewUrlParser: true, useUnifiedTopology: true});
-
+const conn = mongoose.createConnection("mongodb://localhost:27017/asinDB", {useNewUrlParser: true, useUnifiedTopology: true});
+const conn2 = mongoose.createConnection("mongodb://localhost:27017/HteamUserDB", {useNewUrlParser: true, useUnifiedTopology: true});
 const asinSchema = new mongoose.Schema ({
   asinId:String,
   parentAsinId:String,
@@ -24,14 +24,19 @@ const asinSchema = new mongoose.Schema ({
   buyBoxpriceId:Number
 });
 
+const Asin = conn.model("Asin", asinSchema);
+
+module.exports = asinSchema;
+
 const userSchema = new mongoose.Schema({
   email:String,
   password:String
 });
 
-const Asin = mongoose.model("Asin", asinSchema);
 
-const User = new mongoose.model("User",userSchema);
+const User =conn2.model("User",userSchema);
+
+module.exports = userSchema;
 
 
 var asin = '';
@@ -175,7 +180,7 @@ app.post("/register", function (req,res){
       if(err){
         console.log(err);
       }else{
-        res.render("home");
+        res.redirect("/");
       }
     });
 });
@@ -193,7 +198,7 @@ app.post("/login",function(req,res){
       if(foundUser){
         bcrypt.compare(password,foundUser.password,function(err,result){
         if(result===true){
-        res.render("home");
+        res.redirect("/");
         }
       });
       }
