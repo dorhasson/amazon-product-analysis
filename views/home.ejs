@@ -63,6 +63,7 @@
   <div class="container-table100">
     <div class="wrap-table100">
       <div class="table100 ver1">
+
         <div class="table100-firstcol">
           <table class="firs-table">
             <thead>
@@ -70,47 +71,52 @@
                 <th class="cell100 column1">Asin</th>
               </tr>
             </thead>
+            <%amzAsinData.forEach(function(asin){%>
+              <form action="/delete" method="post">
             <tbody>
               <tr class="row100 body asin-data-row">
-                <td class="cell100 column1.1"><%=asinNumber%></td>
+                <td class="cell100 column1.1"><div><a href="<%=asin.amzUr%> " target="_blank"><img class="product-image" src="<%=asin.image%> " alt=" "></a></div></td>
+                <td><div class="asin-id"><%=asin.asinId%></div></td>
+                <td><div><button type="submit" class="btn btn-danger" name="deletedItem" value="<%=asin._id%>">X</button></div></td>
               </tr>
             </tbody>
+          </form>
+            <%});%>
           </table>
-          <div class="div-product-image">
-          <a href="<%=productUrl%>" target="_blank"><img class="product-image" src="<%=imageUrl%>" alt=""></a>
-          </div>
         </div>
+
 
         <div class="wrap-table100-nextcols js-pscroll">
           <div class="table100-nextcols">
             <table class ="table-main-width">
               <thead>
                 <tr class="row100 head">
-                  <th class="cell100 column2">Date</th>
-                  <th class="cell100 column3">COGS</th>
-                  <th class="cell100 column4">Price</th>
-                  <th class="cell100 column5">Root Category</th>
-                  <th class="cell100 column6">FBA Fees</th>
-                  <th class="cell100 column7">Fees</th>
-                  <th class="cell100 column8">Landed Cost</th>
-                  <th class="cell100 column9">Profit</th>
-                  <th class="cell100 column10">Roi</th>
-                  <th class="cell100 column11">AVG PRICE LAST 30D</th>
+                  <th class="cell100 column2">Date<i class="fas fa-question-circle f1"></i><div class="question-mark-display-1">The date you recieved the data</div></th>
+                  <th class="cell100 column3">COGS<i class="fas fa-question-circle f2"></th>
+                  <th class="cell100 column4">Price<i class="fas fa-question-circle f3"></th>
+                  <th class="cell100 column5">Root Category<i class="fas fa-question-circle f4"></th>
+                  <th class="cell100 column6">FBA Fees<i class="fas fa-question-circle f5"></th>
+                  <th class="cell100 column7">Fees<i class="fas fa-question-circle f6"></th>
+                  <th class="cell100 column8">Landed Cost<i class="fas fa-question-circle f7"></th>
+                  <th class="cell100 column9">Profit<i class="fas fa-question-circle f8"></th>
+                  <th class="cell100 column10">Roi<i class="fas fa-question-circle f9"></th>
+                  <th class="cell100 column11">AVG PRICE LAST 30D<i class="fas fa-question-circle f10"></th>
                 </tr>
               </thead>
+              <%amzAsinData.forEach(function(asin){%>
               <tbody class="product-data-row">
                 <tr class="row100 body">
-                  <td class="cell100 column2"><%=date%></td>
-                  <td class="cell100 column3"><%=cost%></td>
-                  <td class="cell100 column4"><%=priceNumber%></td>
-                  <td class="cell100 column5"><%=categoryNumber%></td>
-                  <td class="cell100 column6"><%=fbaFeeNumber%></td>
-                  <td class="cell100 column7"><%=referal%></td>
-                  <td class="cell100 column8"><%=landed%></td>
-                  <td class="cell100 column9"><%=profit%></td>
-                  <td class="cell100 column10 roi"><%=roi%></td>
-                  <td class="cell100 column11"><span class="green-per">%</span><span class="green-per-i"><i class="fas fa-arrow-up"></i></span><span class="red-per">%</span><span class="red-per-i" ><i class="fas fa-arrow-down"></i></span></td>
+                  <td class="cell100 column2"><%=asin.dateRequest%></td>
+                  <td class="cell100 column3"><%=asin.supplierCost%></td>
+                  <td class="cell100 column4"><%=asin.buyBoxpriceId%></td>
+                  <td class="cell100 column5"><%=asin.categoryId%></td>
+                  <td class="cell100 column6"><%=asin.fbaFeesId%></td>
+                  <td class="cell100 column7"><%=asin.prodReferalFee%></td>
+                  <td class="cell100 column8"><%=asin.landedCost%></td>
+                  <td class="cell100 column9"><%=asin.prodProfit%></td>
+                  <td class="cell100 column10 roi"><%=asin.prodRoi%><span class="persentage">%</span><i class="fas fa-arrow-up"></i><i class="fas fa-arrow-down"></i></td>
                   <td class="cell100 column11"></td>
+                  <%});%>
                 </tr>
               </tbody>
             </table>

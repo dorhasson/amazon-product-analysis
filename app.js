@@ -20,8 +20,16 @@ const asinSchema = new mongoose.Schema ({
   asinId:String,
   parentAsinId:String,
   categoryId:String,
-  feesId:Number,
-  buyBoxpriceId:Number
+  fbaFeesId:Number,
+  buyBoxpriceId:Number,
+  image:String,
+  dateRequest:String,
+  amzUrl:String,
+  prodProfit:Number,
+  prodRoi:Number,
+  landedCost:Number,
+  prodReferalFee:Number,
+  supplierCost:Number
 });
 
 const Asin = conn.model("Asin", asinSchema);
@@ -65,15 +73,43 @@ var allPrices =[];
 var miliSec ='';
 var epocTimeConvertor='';
 
-var last30Days='';
+// var productData =[asin,category,fbaFee,date,curentPrice,img1,img2,prodUrl,cogs,curentProfit,curentRoi,costLanded,referalFee];
+// var last30Days='';
+
+  const noData = new Asin({
+    asinId:"Search for an Asin",
+    parentAsinId:"",
+    categoryId:"",
+    fbaFeesId:0,
+    buyBoxpriceId:0,
+    image:"",
+    dateRequest:"",
+    amzUrl:"",
+    prodProfit:0,
+    prodRoi:0,
+    landedCost:0,
+    prodReferalFee:0,
+    supplierCost:0
+  });
+
+  const defaultAsin = [noData];
+
 
 app.get("/", function(req, res) {
-  Asin.findOne({asinId:asin},function(err){
-    if(!err){
-     res.render("home",{asinNumber:asin,categoryNumber:category,fbaFeeNumber:fbaFee,date:date,priceNumber:curentPrice,
-     imageUrl:img1 + img2,productUrl:prodUrl+asin,cost:cogs,profit:curentProfit,roi:curentRoi,landed:costLanded,referal:referalFee});
+  Asin.find({},function(err,foundData){
+
+    if(foundData.lengh === 0){
+      Asin.insertMany(defaultAsin,function(err){
+        if(err){
+          console.log(err);
+        }else{
+          console.log("default mode apply");
+        }
+      });
+      res.redirect("/");
+    }else{
+      res.render("home",{asinNumber:asin,imageUrl:img1 + img2,productUrl:prodUrl+asin,amzAsinData:foundData});
     }
-    // res.sendFile(__dirname + "/index.html");
   });
 });
 
@@ -140,8 +176,16 @@ getDatesAndPrices();
     asinId:asin,
     parentAsinId:parentAsin,
     categoryId:category,
-    feesId:fbaFee,
-    buyBoxpriceId:curentPrice
+    fbaFeesId:fbaFee,
+    buyBoxpriceId:curentPrice,
+    image:img1 + img2,
+    dateRequest:date,
+    amzUrl:prodUrl+asin,
+    prodProfit:curentProfit,
+    prodRoi:curentRoi,
+    landedCost:costLanded,
+    prodReferalFee:referalFee,
+    supplierCost:cogs
   });
 
   newAsin.save(function(err){
@@ -158,6 +202,15 @@ getDatesAndPrices();
 
 });
 
+app.post("/delete",function(req, res){
+  const deleteItemId = req.body.deletedItem;
+  Asin.findByIdAndRemove(deleteItemId,function(err){
+    if(!err){
+      console.log("successfully deleted Asin");
+      res.redirect("/");
+    }
+  })
+});
 
 
 app.get("/login",function(req,res){
@@ -209,3 +262,16 @@ app.post("/login",function(req,res){
   app.listen(3000, function() {
   console.log("server is running on port 3000");
 });
+
+
+
+
+// app.get("/", function(req, res) {
+//   Asin.find({},function(err,foundData){
+//     if(!err){
+//      res.render("home",{asinNumber:asin,categoryNumber:category,fbaFeeNumber:fbaFee,date:date,priceNumber:curentPrice,
+//      imageUrl:img1 + img2,productUrl:prodUrl+asin,cost:cogs,profit:curentProfit,roi:curentRoi,landed:costLanded,referal:referalFee});
+//     }
+//     // res.sendFile(__dirname + "/index.html");
+//   });
+// });

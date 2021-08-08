@@ -14,13 +14,13 @@ tbody.body-parameters{
 line-height:5;
 }
 
-.btn{
+.btn-primary{
 position: relative;
 line-height: 1;
 top:-0.1em;
 background-color: #0d8efd !important
 }
-.btn:hover{
+.btn-primary:hover{
  background-color:#1271c3 !important;
 }
 
@@ -38,6 +38,14 @@ section.left-side-bar{
 img.product-image{
   width: 60px;
   height: 60px;
+  position: relative;
+  top:-3em;
+}
+
+.asin-id{
+  position: relative;
+  top:2.4em;
+  right:3.5em;
 }
 
 img.product-image:hover{
@@ -82,34 +90,21 @@ td.cell100.column1\.1 {
 }
 /******Table-position*****/
 
-span.green-per{
-  color:#00b300;
-  position: relative;
-  right: 40.7em;
-  top:0.7em;
-  display: none;
-}
-span.green-per-i{
-  color:#00b300;
-  position: relative;
-  right: 40em;
-  top:-0.7em;
-  display: none;
+.fa-arrow-up{
+color:#00b300;
 }
 
-span.red-per {
-    position: relative;
-    right: 62.2em;
-    top:0.7em;
-    color:#f00;
-    display: none ;
+.fa-arrow-down{
+color:#f00;
 }
-span.red-per-i{
-  color:#f00;
+
+.fa-question-circle{
   position: relative;
-  right: 61.3em;
-  top:-0.7em;
-  display: none ;
+  left: 0.5em;
+}
+
+.question-mark-display-1{
+  display: none;
 }
 
 /****************************/
