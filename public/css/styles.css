@@ -1,3 +1,8 @@
+.home-page{
+  width: 70%;
+  margin-left: 15%;
+  margin-top: 15em;
+}
 .main-table{
   width:80%;
   /* border: solid; */
@@ -284,10 +289,14 @@ th, td {
 
 .column6 {
   width: 160px;
+  position: relative;
+  right:5em;
 }
 
 .column7 {
   width: 150px;
+  position: relative;
+  right:1em;
 }
 
 .column8 {
@@ -295,6 +304,14 @@ th, td {
 }
 .column9 {
   width: 150px;
+  position: relative;
+  right:3em;
+}
+
+.column11 {
+  width: 150px;
+  position: relative;
+  right:2em;
 }
 
 .table100 th {

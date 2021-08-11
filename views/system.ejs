@@ -1,0 +1,153 @@
+<%- include('partials/header') %>
+
+<div class="div-lottiefiles">
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+  <lottie-player class="lottiefiles" src="https://assets7.lottiefiles.com/packages/lf20_yrgkfams.json"  background="transparent"  speed="2"  style="width: 50px; height: 50px; position:absolute; left:11em; top:6.5em;"  loop autoplay></lottie-player>
+</div>
+
+
+<section class="left-side-bar">
+  <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px; height:100vh; top:-4em;">
+      <span class="fs-4">Asin Analysis</span>
+    <hr>
+    <ul class="nav nav-pills flex-column mb-auto">
+      <li class="nav-item">
+        <!-- <a href="#" class="nav-link active" aria-current="page"> -->
+          <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"/></svg>
+          <div class="input-group">
+          <form action="/system" method="post">
+            <input id="asinInput" type="text" name="asinIdInput" value="" placeholder="Type Asin" required>
+            <input id="costId" type="text" name="costIdInput" value="" placeholder="Cost of Goods" required>
+            <button class="btn btn-primary" type="submit">Go</button>
+          </form>
+          </div>
+        <!-- </a> -->
+      </li>
+      <hr>
+      <li class="dashboard">
+        <a href="#" class="nav-link text-white">
+          <i class="fas fa-tachometer-alt"></i>
+          Dashboard
+        </a>
+      </li>
+      <hr>
+      <li>
+        <a href="#" class="nav-link text-white">
+          <i class="fas fa-thumbs-up"></i>
+          Take Products
+        </a>
+      </li>
+      <hr>
+      <li>
+        <a href="#" class="nav-link text-white">
+          <i class="fab fa-first-order"></i>
+          Orders
+        </a>
+      </li>
+      <hr>
+      <li>
+        <a href="#" class="nav-link text-white">
+          <i class="fas fa-upload"></i>
+          Upload CSV
+        </a>
+      </li>
+    </ul>
+    <hr>
+  </div>
+
+</section>
+
+<section class="main-table">
+
+<div class="limiter">
+  <div class="container-table100">
+    <div class="wrap-table100">
+      <div class="table100 ver1">
+
+        <div class="table100-firstcol">
+          <table class="firs-table">
+            <thead>
+              <tr class="row100 head asin-row">
+                <th class="cell100 column1">Asin</th>
+              </tr>
+            </thead>
+            <%amzAsinData.forEach(function(asin){%>
+              <form action="/delete" method="post">
+            <tbody>
+              <tr class="row100 body asin-data-row">
+                <td class="cell100 column1.1"><div><a href="<%=asin.amzUrl%> " target="_blank"><img class="product-image" src="<%=asin.image%> " alt=" "></a></div></td>
+                <td><div class="asin-id"><%=asin.asinId%></div></td>
+                <td><div><button type="submit" class="btn btn-danger" name="deletedItem" value="<%=asin._id%>">X</button></div></td>
+              </tr>
+            </tbody>
+          </form>
+            <%});%>
+          </table>
+        </div>
+
+
+        <div class="wrap-table100-nextcols js-pscroll">
+          <div class="table100-nextcols">
+            <table class ="table-main-width">
+              <thead>
+                <tr class="row100 head">
+                  <th class="cell100 column2">Date<i class="fas fa-question-circle f2"></i><div class="question-mark-display-1">The date you recieved the data</div></th>
+                  <th class="cell100 column3">COGS<i class="fas fa-question-circle f3"></th>
+                  <th class="cell100 column4">Price<i class="fas fa-question-circle f4"></th>
+                  <th class="cell100 column5">BSR<i class="fas fa-question-circle f5"></th> 
+                  <th class="cell100 column6">Root Category<i class="fas fa-question-circle f6"></th>
+                  <th class="cell100 column7">FBA Fees<i class="fas fa-question-circle f7"></th>
+                  <th class="cell100 column8">Fees<i class="fas fa-question-circle f8"></th>
+                  <th class="cell100 column9">Landed Cost<i class="fas fa-question-circle f9"></th>
+                  <th class="cell100 column10">Profit<i class="fas fa-question-circle f10"></th>
+                  <th class="cell100 column11">Roi<i class="fas fa-question-circle f11"></th>
+                  <th class="cell100 column12">AVG PRICE LAST 30D<i class="fas fa-question-circle f12"></th>
+                  <th class="cell100 column13">AVG Profit last 30D<i class="fas fa-question-circle f13"></i></th>
+                  <th class="cell100 column14">AVG roi last 30D<i class="fas fa-question-circle f14"></i></th>
+                  <th class="cell100 column15">AVG BSR last 30D<i class="fas fa-question-circle f15"></i></th>
+                  <th class="cell100 column16">AVG PRICE LAST 60D<i class="fas fa-question-circle f16"></i></th>
+                  <th class="cell100 column17">AVG Profit LAST 60D<i class="fas fa-question-circle f17"></i></th>
+                  <th class="cell100 column18">AVG roi LAST 60D<i class="fas fa-question-circle f18"></i></th>
+                  <th class="cell100 column19">AVG BSR last 60D<i class="fas fa-question-circle f19"></i></th>
+                </tr>
+              </thead>
+              <%amzAsinData.forEach(function(asin){%>
+              <tbody class="product-data-row">
+                <tr class="row100 body">
+                  <td class="cell100 column2"><%=asin.dateRequest%></td>
+                  <td class="cell100 column3"><%=asin.supplierCost%></td>
+                  <td class="cell100 column4"><%=asin.buyBoxpriceId%></td>
+                  <td class="cell100 column5"><%=asin.bsrId%></td>
+                  <td class="cell100 column6"><%=asin.categoryId%></td>
+                  <td class="cell100 column7"><%=asin.fbaFeesId%></td>
+                  <td class="cell100 column8"><%=asin.prodReferalFee%></td>
+                  <td class="cell100 column9"><%=asin.landedCost%></td>
+                  <td class="cell100 column10"><%=asin.prodProfit%></td>
+                  <td class="cell100 column11 roi"><%=asin.prodRoi%><span class="persentage">%</span><i class="fas fa-arrow-up"></i><i class="fas fa-arrow-down"></i></td>
+                  <td class="cell100 column12"><%=asin.avgPriceTd%></td>
+                  <td class="cell100 column13"><%=asin.avgProfitTd%></td>
+                  <td class="cell100 column14"><%=asin.avgRoiTd%><span class="persentage">%</span><i class="fas fa-arrow-up"></i><i class="fas fa-arrow-down"></i></td>
+                  <td class="cell100 column15"><%=asin.bsrIdTd%></td>
+                  <td class="cell100 column16"><%=asin.avgPriceSd%></td>
+                  <td class="cell100 column17"><%=asin.avgProfitSd%></td> 
+                  <td class="cell100 column18"><%=asin.avgRoiSd%><span class="persentage">%</span><i class="fas fa-arrow-up"></i><i class="fas fa-arrow-down"></i></td>
+                  <td class="cell100 column19"><%=asin.bsrIdSd%></td>
+                  <%});%>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<script src="https://kit.fontawesome.com/113f08f027.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script type="text/javascript" src="jquery/jquery.js"></script>
+
+
+<%- include('partials/footer') %>
