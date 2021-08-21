@@ -18,7 +18,7 @@
           <form action="/system" method="post">
             <input id="asinInput" type="text" name="asinIdInput" value="" placeholder="Type Asin" required>
             <input id="costId" type="text" name="costIdInput" value="" placeholder="Cost of Goods" required>
-            <button class="btn btn-primary" type="submit">Go</button>
+            <button class="btn btn-primary btn-ajax" type="submit">Go</button>
           </form>
           </div>
         <!-- </a> -->
@@ -46,10 +46,12 @@
       </li>
       <hr>
       <li>
-        <a href="#" class="nav-link text-white">
           <i class="fas fa-upload"></i>
           Upload CSV
-        </a>
+          <form action="/upload" method="post" enctype="multipart/form-data">
+          <input style="width:95%;" type="file" name="csv" accept=".csv" id="upload-csv">
+          <button class="btn btn-primary" type="submit">UPLOAD</button>
+        </form>
       </li>
     </ul>
     <hr>
@@ -60,7 +62,7 @@
 <section class="main-table">
 
 <div class="limiter">
-  <div class="container-table100">
+  <div id="ajax-meth" class="container-table100">
     <div class="wrap-table100">
       <div class="table100 ver1">
 
@@ -68,11 +70,11 @@
           <table class="firs-table">
             <thead>
               <tr class="row100 head asin-row">
-                <th class="cell100 column1">Asin</th>
+                <th id="ajax-meth-2" class="cell100 column1">Asin</th>
               </tr>
             </thead>
-            <%amzAsinData.forEach(function(asin){%>
-              <form action="/delete" method="post">
+            <form action="/delete" method="post">
+            <%amzAsinData.forEach(function(asin){%>   
             <tbody>
               <tr class="row100 body asin-data-row">
                 <td class="cell100 column1.1"><div><a href="<%=asin.amzUrl%> " target="_blank"><img class="product-image" src="<%=asin.image%> " alt=" "></a></div></td>
@@ -80,16 +82,16 @@
                 <td><div><button type="submit" class="btn btn-danger" name="deletedItem" value="<%=asin._id%>">X</button></div></td>
               </tr>
             </tbody>
-          </form>
             <%});%>
-          </table>
+          </form>
+         </table>
         </div>
 
 
         <div class="wrap-table100-nextcols js-pscroll">
           <div class="table100-nextcols">
             <table class ="table-main-width">
-              <thead>
+              <thead>            
                 <tr class="row100 head">
                   <th class="cell100 column2">Date<i class="fas fa-question-circle f2"></i><div class="question-mark-display-1">The date you recieved the data</div></th>
                   <th class="cell100 column3">COGS<i class="fas fa-question-circle f3"></th>
@@ -109,7 +111,7 @@
                   <th class="cell100 column17">AVG Profit LAST 60D<i class="fas fa-question-circle f17"></i></th>
                   <th class="cell100 column18">AVG roi LAST 60D<i class="fas fa-question-circle f18"></i></th>
                   <th class="cell100 column19">AVG BSR last 60D<i class="fas fa-question-circle f19"></i></th>
-                </tr>
+                </tr>          
               </thead>
               <%amzAsinData.forEach(function(asin){%>
               <tbody class="product-data-row">
@@ -132,9 +134,9 @@
                   <td class="cell100 column17"><%=asin.avgProfitSd%></td> 
                   <td class="cell100 column18"><%=asin.avgRoiSd%><span class="persentage">%</span><i class="fas fa-arrow-up"></i><i class="fas fa-arrow-down"></i></td>
                   <td class="cell100 column19"><%=asin.bsrIdSd%></td>
-                  <%});%>
                 </tr>
               </tbody>
+              <%});%>
             </table>
           </div>
         </div>
@@ -145,7 +147,6 @@
 </section>
 
 <script src="https://kit.fontawesome.com/113f08f027.js" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script type="text/javascript" src="jquery/jquery.js"></script>
 

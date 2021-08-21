@@ -8,6 +8,11 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 const passport = require('passport');
 const passportLocalMongoose = require('passport-local-mongoose');
+const puppeteer = require('puppeteer');
+const cheerio = require('cheerio');
+const $ = cheerio.load('<h2 class="title">Hello world</h2>');
+const { log } = require('console');
+const multer = require('multer');
 
 const app = express();
 
@@ -88,7 +93,6 @@ var img1 = 'https://images-na.ssl-images-amazon.com/images/I/';
 var img2 = '';
 var prodUrl = 'https://amazon.com/dp/';
 var cogs = '';
-//var avgPrice = '';
 var curentProfit = '';
 var curentRoi = '';
 var costLanded = '';
@@ -140,6 +144,17 @@ var avgBsrRankSixtyDays='';
 
   const defaultAsin = [noData];
 
+  const fileStorageEngine = multer.diskStorage({
+    destination: (req,file,cb)=>{
+      cb(null,'./public/uploads/');
+    },
+    filename:(req,file,cb)=>{
+      cb(null, Math.random() + file.originalname);
+    }
+  });
+
+  const upload = multer({storage:fileStorageEngine});
+
 app.get("/",function(req,res){
   res.render("home");
 });
@@ -169,7 +184,6 @@ app.get("/system", function(req, res) {
 
 app.post("/system", function(req, res) {
 
-//console.log(req.body.asinId);
 cogs = req.body.costIdInput;
 const query = req.body.asinIdInput;
 const apiKey = process.env.API_KEY;
@@ -188,7 +202,7 @@ const options = {
   https.get(url,options,function(response) {
   response = decompressResponse(response);
   console.log(res.statusCode);
-  //console.log(res.headers);
+  
   var data = '';
 
   response.on("data", function(chunk){
@@ -215,6 +229,8 @@ const options = {
   date = new Date(currentTime).toISOString().split('T')[0];
   
 ////////////////////////////////// PRICES ANALOGY /////////////////////////////////////
+////////////////////// Saparate prices and dates to two differents arrays ////////////
+
   function getDatesAndPrices(){
     for (var i = 0; i < priceHistory.length; i += 2) {
     allDates.push(priceHistory[i]);
@@ -402,6 +418,10 @@ app.post("/login",function(req,res){
     });
   }
   });
+});
+
+app.post("/upload",upload.single('csv'), function (req,res){
+  res.redirect("/system");
 });
 
   app.listen(3000, function() {

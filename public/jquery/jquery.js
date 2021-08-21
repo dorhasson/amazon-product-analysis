@@ -1,5 +1,20 @@
 $(document).ready(function() {
 
+  // $(function() {
+  //   $(".btn-ajax").on("click", function () {
+  //     $.ajax({
+  //       type: 'GET',
+  //       url: '/system',
+  //       success: function() {
+  //          var html = $('#ajax-meth');
+  //             // html += 
+  //         $('#ajax-meth').html(html);
+  //       }
+  //     });
+  //   });
+  // });
+
+
   // $('.roi').each(function() {
   //   var amount = parseInt($('.roi').html());
   //   if (amount < 10) {
